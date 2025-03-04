@@ -1,6 +1,8 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { PrismaClient } from "@prisma/client";
+import { emailOTP } from "better-auth/plugins";
+import { sendEmail } from "./lib/send-email";
 
 const prisma = new PrismaClient();
 export const auth = betterAuth({
@@ -15,4 +17,14 @@ export const auth = betterAuth({
   },
 
   trustedOrigins: ["http://localhost:3000"],
+
+  plugins: [
+    emailOTP({
+      async sendVerificationOTP({ email, otp, type }) {
+        if (type === "sign-in") {
+          sendEmail({ email, otp });
+        }
+      },
+    }),
+  ],
 });
