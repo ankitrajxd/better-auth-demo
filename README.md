@@ -15,5 +15,6 @@ This repository is a demonstration of how to implement better-auth on a NextJS p
 - Redirect to Signin page if not authenticated ✅
 - Redirect to requested page after signin ✅
 - Signin with email and password (todo).
-- Accessing Session on both client and server.
-- Protecting routes on both client and server with nextjs middleware.
+- Signin/signup with Email Otp ✅
+- Accessing Session on both client and server. ✅
+- Protecting routes on both client and server with nextjs middleware. ✅
