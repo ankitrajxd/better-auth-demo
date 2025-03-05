@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import { redirect, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 export function LoginForm({
@@ -25,6 +25,7 @@ export function LoginForm({
   const [error, setError] = useState("");
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirect") || "/";
+  const router = useRouter();
 
   async function handleLogin(
     e: FormEvent<HTMLFormElement>,
@@ -56,7 +57,7 @@ export function LoginForm({
       });
 
       if (!error) {
-        redirect(redirectTo);
+        router.push(redirectTo);
       } else {
         const formattedErr: string =
           (error.message?.split("").at(0)?.toUpperCase() || "") +
@@ -112,6 +113,7 @@ export function LoginForm({
                     <Label htmlFor="email">Email</Label>
                     {userEmail && (
                       <button
+                        type="button" // so that it will not act as the form submit button.
                         className="cursor-pointer text-xs opacity-45 underline hover:opacity-90 "
                         onClick={() => {
                           // reset the form
