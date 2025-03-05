@@ -11,9 +11,15 @@ const Home = async () => {
   return (
     <div className="grid place-content-center h-screen">
       <p>HomePage</p>
-      {!session && <Link className="border p-2 absolute right-2 top-2" href="/login" >Login</Link>}
+      {!session && (
+        <Link className="border p-2 absolute right-2 top-2" href="/login">
+          Login
+        </Link>
+      )}
       {session && <SignoutButton />}
-      <Link className="p-2 bg-gray-600 text-white" href="/dashboard">Dashboard</Link>
+      <Link className="p-2 bg-gray-600 text-white" href="/dashboard">
+        Dashboard
+      </Link>
     </div>
   );
 };
