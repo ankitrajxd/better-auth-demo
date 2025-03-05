@@ -18,3 +18,7 @@ This repository is a demonstration of how to implement better-auth on a NextJS p
 - Signin/signup with Email Otp ✅
 - Accessing Session on both client and server. ✅
 - Protecting routes on both client and server with nextjs middleware. ✅
+
+## ScreenShot(s)
+
+![alt text](./public/image.png)
