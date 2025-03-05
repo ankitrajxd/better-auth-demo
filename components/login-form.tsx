@@ -58,7 +58,10 @@ export function LoginForm({
       if (!error) {
         redirect(redirectTo);
       } else {
-        setError(error?.message as string);
+        const formattedErr: string =
+          (error.message?.split("").at(0)?.toUpperCase() || "") +
+          (error.message?.slice(1) || "");
+        setError(formattedErr as string);
       }
     }
   }
@@ -148,7 +151,7 @@ export function LoginForm({
                           {error}
                         </p>
                       )}
-                      {otpSent && (
+                      {otpSent && !error && (
                         <p className="text-green-500 text-center text-xs">
                           {" "}
                           OTP sent successfully
