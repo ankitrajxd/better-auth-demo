@@ -119,6 +119,7 @@ export function LoginForm({
                           // reset the form
                           setOtpSent(false);
                           setUserEmail("");
+                          setError("");
                         }}
                       >
                         Change email
