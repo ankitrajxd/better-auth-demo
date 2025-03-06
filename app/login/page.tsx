@@ -21,8 +21,8 @@ const SignInPage = async ({ searchParams }: Props) => {
   }
 
   return (
-    <div className="grid place-content-center w-full h-screen bg-zinc-50">
-      <div className="w-sm">
+    <div className="grid place-content-center w-full h-screen bg-zinc-50 p-5">
+      <div className="max-w-sm">
         <LoginForm />
       </div>
     </div>

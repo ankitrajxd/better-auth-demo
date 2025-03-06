@@ -10,8 +10,8 @@ const Home = async () => {
     headers: await headers(), // you need to pass the headers object.
   });
   return (
-    <div className="grid place-content-center h-screen bg-zinc-50">
-      <div className="w-md flex justify-center items-center bg-white  flex-col gap-2 border p-6 rounded-md">
+    <div className="grid place-content-center h-screen bg-zinc-50 p-3">
+      <div className="max-w-md flex justify-center items-center bg-white  flex-col gap-2 border p-6 rounded-md">
         <p className="text-center text-sm">
           This is a public page that anyone can visit. Below is the link to a
           protected page which only a{" "}
