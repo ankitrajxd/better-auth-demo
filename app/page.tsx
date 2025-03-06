@@ -18,7 +18,7 @@ const Home = async () => {
           <span className="font-bold">logged-in</span> user can visit. If you
           try to visit it without signin you will get redirected to the
           sign-in/sign-up page automatically. After successful login,
-          you&apos;ll be redirected to the page requested.
+          you&apos;ll be redirected to the page requested. 
         </p>
 
         {session && <SignoutButton />}
