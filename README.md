@@ -1,4 +1,4 @@
-# Implementation of Better-auth in NextJS Project.
+# Implementation of Better-auth in NextJS Project
 
 This repository is a demonstration of how to implement better-auth on a NextJS project.
 
