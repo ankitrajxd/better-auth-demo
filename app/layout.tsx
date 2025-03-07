@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
+import NextTopLoader from "nextjs-toploader";
 
 const dmSans = DM_Sans({
   weight: ["400", "500", "600", "700"],
@@ -19,7 +20,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={` ${dmSans.className} antialiased`}>{children}</body>
+      <body className={` ${dmSans.className} antialiased`}>
+        {" "}
+        <NextTopLoader />
+        {children}
+      </body>
     </html>
   );
 }
