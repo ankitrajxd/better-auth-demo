@@ -13,8 +13,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import { redirect, useRouter, useSearchParams } from "next/navigation";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { FormEvent, useState } from "react";
+import { useRouter } from "nextjs-toploader/app";
 
 export function LoginForm({
   className,
@@ -27,39 +28,6 @@ export function LoginForm({
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirect") || "/";
   const router = useRouter();
-  const otpInput = useRef<HTMLInputElement>(null);
-  const remainingTime = 30;
-  const [timeLeft, setTimeLeft] = useState(remainingTime);
-
-  useEffect(() => {
-    if (otpSent || otpSentCount > 1) {
-      otpInput.current?.focus();
-    }
-
-    return () => {
-      if (otpInput.current) {
-        otpInput.current.value = "";
-      }
-    };
-  }, [otpSent, otpSentCount]);
-
-  useEffect(() => {
-    let interval: NodeJS.Timeout | undefined;
-
-    if (otpSent && timeLeft > 0) {
-      interval = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
-      }, 1000);
-    }
-
-    if (timeLeft <= 0 && interval) {
-      clearInterval(interval);
-    }
-
-    return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [otpSent, timeLeft]);
 
   async function handleLogin(
     e: FormEvent<HTMLFormElement>,
@@ -209,8 +177,8 @@ export function LoginForm({
                       className={error && "border-red-500"}
                       id="otp"
                       name="otp"
+                      type="text"
                       required
-                      ref={otpInput}
                     />
                     <div className="h-1">
                       {error && (
