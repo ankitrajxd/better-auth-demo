@@ -16,13 +16,16 @@ export const auth = betterAuth({
     },
   },
 
-  trustedOrigins: ["http://localhost:3000"],
+  trustedOrigins: [
+    "http://localhost:3000",
+    "https://better-auth-demo-chi.vercel.app/",
+  ],
 
   plugins: [
     emailOTP({
       async sendVerificationOTP({ email, otp, type }) {
         if (type === "sign-in") {
-          sendEmail({ email, otp });
+          await sendEmail({ email, otp });
         }
       },
     }),
