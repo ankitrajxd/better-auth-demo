@@ -33,10 +33,10 @@ export function LoginForm({
   const [timeLeft, setTimeLeft] = useState(remainingTime);
 
   useEffect(() => {
-    if (otpSent) {
+    if (otpSent || otpSentCount > 1) {
       otpInput.current?.focus();
     }
-  }, [otpSent]);
+  }, [otpSent, otpSentCount]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | undefined;
@@ -169,32 +169,33 @@ export function LoginForm({
                     <div className="flex items-center justify-between">
                       <Label htmlFor="otp">Otp</Label>
                       {otpSent && (
-                        <p className="text-xs text-zinc-400 underline hover:text-zinc-600 cursor-pointer">
-                          <button
-                            disabled={timeLeft > 0}
-                            type="button"
-                            className="cursor-pointer"
-                            onClick={async () => {
-                              console.log("resending otp");
+                        <button
+                          disabled={timeLeft > 0}
+                          type="button"
+                          className={`${
+                            timeLeft > 0 && "opacity-50 cursor-not-allowed"
+                          } cursor-pointer text-xs`}
+                          onClick={async () => {
+                            console.log("resending otp");
 
-                              const { data } =
-                                await emailOtp.sendVerificationOtp({
-                                  email: userEmail,
-                                  type: "sign-in",
-                                });
-
-                              console.log("otp resent");
-
-                              if (data?.success) {
-                                setError("");
-                                setOtpSentCount((prev) => prev + 1);
-                                setTimeLeft(remainingTime);
+                            const { data } = await emailOtp.sendVerificationOtp(
+                              {
+                                email: userEmail,
+                                type: "sign-in",
                               }
-                            }}
-                          >
-                            Resend Otp {timeLeft > 0 && `(${timeLeft}s)`}
-                          </button>
-                        </p>
+                            );
+
+                            console.log("otp resent");
+
+                            if (data?.success) {
+                              setError("");
+                              setOtpSentCount((prev) => prev + 1);
+                              setTimeLeft(remainingTime);
+                            }
+                          }}
+                        >
+                          Resend Otp {timeLeft > 0 && `(${timeLeft}s)`}
+                        </button>
                       )}
                     </div>
                     <Input
@@ -214,7 +215,7 @@ export function LoginForm({
                       {otpSent && !error && (
                         <p className="text-green-500 text-center text-xs">
                           {otpSentCount > 1
-                            ? "Otp resend successfully"
+                            ? "Otp resent successfully"
                             : "Otp Sent"}{" "}
                         </p>
                       )}
