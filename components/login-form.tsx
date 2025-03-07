@@ -82,11 +82,13 @@ export function LoginForm({
       const { data, error } = await signIn.emailOtp({
         email: userEmail as string,
         otp: otp,
+        fetchOptions: {
+          onSuccess: () => router.push(redirectTo),
+        },
       });
 
-      if (!error) {
-        router.push(redirectTo);
-      } else {
+      if (error) {
+        // router.refresh();
         const formattedErr: string =
           (error.message?.split("").at(0)?.toUpperCase() || "") +
           (error.message?.slice(1) || "");
