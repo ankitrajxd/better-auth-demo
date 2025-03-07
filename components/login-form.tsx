@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import { useRouter, useSearchParams } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useEffect, useRef, useState } from "react";
 
 export function LoginForm({
@@ -35,6 +35,12 @@ export function LoginForm({
     if (otpSent || otpSentCount > 1) {
       otpInput.current?.focus();
     }
+
+    return () => {
+      if (otpInput.current) {
+        otpInput.current.value = "";
+      }
+    };
   }, [otpSent, otpSentCount]);
 
   useEffect(() => {
@@ -83,7 +89,7 @@ export function LoginForm({
         email: userEmail as string,
         otp: otp,
         fetchOptions: {
-          onSuccess: () => router.push(redirectTo),
+          onSuccess: () => redirect(redirectTo),
         },
       });
 
